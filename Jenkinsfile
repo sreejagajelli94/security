@@ -1,5 +1,5 @@
 node  {
-    def Author = 'Atin Singh'
+    def Author = 'Sreeja Gajelli'
 
     stage('Clean WS') {
         sh 'echo "Cleaning WorkSpace"'
@@ -10,25 +10,25 @@ node  {
         checkout scm;
     }
     stage('Compile') {
-        withMaven(jdk: 'jdk8', maven:'m3') {
+        withMaven(jdk: 'jdk11', maven:'m3') {
             sh 'mvn compile'
         }
     }
      stage('Test') {
-        withMaven(jdk: 'jdk8', maven:'m3') {
+        withMaven(jdk: 'jdk11', maven:'m3') {
             sh 'mvn test'
 
         }
     }
 
      stage('Package') {
-        withMaven(jdk: 'jdk8', maven:'m3') {
+        withMaven(jdk: 'jdk11', maven:'m3') {
             sh 'mvn package'
         }
     }
 
     stage('Upload To Artifactory') {
-        withMaven(jdk: 'jdk8', maven:'m3') {
+        withMaven(jdk: 'jdk11', maven:'m3') {
             sh 'mvn install'
         }
     }
