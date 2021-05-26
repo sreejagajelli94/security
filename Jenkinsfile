@@ -1,4 +1,4 @@
-node ('ubuntu1804') {
+node {
     def Author = 'Sreeja Gajelli'
 
     stage('Clean WS') {
