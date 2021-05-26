@@ -20,6 +20,13 @@ node {
 
         }
     }
+    
+    stage('Unit Test') {
+        withMaven(jdk: 'jdk11', maven:'m3') {
+            sh 'mvn test'
+
+        }
+    }
 
      stage('Package') {
         withMaven(jdk: 'jdk11', maven:'m3') {
