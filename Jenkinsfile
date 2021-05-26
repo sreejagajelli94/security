@@ -14,6 +14,13 @@ node {
             sh 'mvn compile'
         }
     }
+    stage ('Static Code Analysis') {
+        steps {
+            withSonarQubeEnv(credentialsId: 'sonar', installationName: 'sonarcloud') {
+                sh 'mvn sonar:sonar'
+            }
+        }
+    }
      stage('Test') {
         withMaven(jdk: 'jdk11', maven:'m3') {
             sh 'mvn test'
