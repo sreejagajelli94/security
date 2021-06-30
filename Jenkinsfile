@@ -13,9 +13,9 @@ pipeline {
 
              booleanParam(name: 'RUN', defaultValue: true, description: 'SELECT TO RUN')
     }
-    triggers {
-        pollSCM('* * * * *')
-    }
+//     triggers {
+//         pollSCM('* * * * *')
+//     }
     tools{
         maven  'm3'
         jdk 'jdk11'
@@ -49,6 +49,21 @@ pipeline {
                 sh 'mvn test'
             }
         }
+        stage('Docker Login') {
+            steps {
+                sh 'docker login -u sreejagajelli -p "Maple@2021"'
+            }
+        }
+        stage('Docker Build Image') {
+            steps {
+                sh 'docker build -t sreejagajelli/test_security:latest .'
+            }
+        }
+        stage('Docker Push Image') {
+            steps {
+                sh 'docker push sreejagajelli/test_security:latest'
+            }
+        }
 
          stage('Package') {
             steps {
@@ -59,7 +74,8 @@ pipeline {
 
     post {
         always {
-            echo 'ALL GOOD '
+            echo 'ALL GOOD'
+            sh 'docker logout'
         }
     }
 
