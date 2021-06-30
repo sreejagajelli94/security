@@ -49,6 +49,11 @@ pipeline {
                 sh 'mvn test'
             }
         }
+        stage('Package') {
+            steps {
+                sh 'mvn package'
+            }
+        }
         stage('Docker Login') {
             steps {
                 sh 'docker login -u sreejagajelli -p "Maple@2021"'
@@ -56,18 +61,12 @@ pipeline {
         }
         stage('Docker Build Image') {
             steps {
-                sh 'docker image build -t sreejagajelli/test_security:latest .'
+                sh 'docker image build -t sreejagajelli/test_security:1.0.0 .'
             }
         }
         stage('Docker Push Image') {
             steps {
-                sh 'docker push sreejagajelli/test_security:latest'
-            }
-        }
-
-         stage('Package') {
-            steps {
-                sh 'mvn package'
+                sh 'docker push sreejagajelli/test_security:1.0.0'
             }
         }
     }
