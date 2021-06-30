@@ -1,4 +1,4 @@
-FROM java:8
+FROM java:11
 WORKDIR /
 ADD ./target/spring-security-good-0.0.1-SNAPSHOT.jar spring-security-good-0.0.1-SNAPSHOT.jar
 EXPOSE 7000
