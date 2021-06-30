@@ -56,7 +56,7 @@ pipeline {
         }
         stage('Docker Build Image') {
             steps {
-                sh 'docker build -t sreejagajelli/test_security:latest .'
+                sh 'docker image build -t sreejagajelli/test_security:latest .'
             }
         }
         stage('Docker Push Image') {
